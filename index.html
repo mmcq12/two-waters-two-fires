@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Two waters, two fires</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1F2;--panel:#FFFFFF;--ink:#0A2230;--muted:#2E4A57;
+  --water:#0A5A78;--fire:#9E2D0A;--line:#9FB3BC;
+  --water-tint:#D6E9F0;--fire-tint:#F6DDD2;
+  --ok:#1D6B35;--no:#9E2D0A;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1A22;--panel:#13242E;--ink:#F3F0E8;--muted:#C7D3D8;
+    --water:#86D3EC;--fire:#FFB08A;--line:#3C5361;
+    --water-tint:#123747;--fire-tint:#3A1E14;
+    --ok:#8FE0A6;--no:#FFB08A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1A22;--panel:#13242E;--ink:#F3F0E8;--muted:#C7D3D8;
+  --water:#86D3EC;--fire:#FFB08A;--line:#3C5361;
+  --water-tint:#123747;--fire-tint:#3A1E14;
+  --ok:#8FE0A6;--no:#FFB08A;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);font-size:calc(100% * var(--scale,1.25))}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Atkinson Hyperlegible",Verdana,"DejaVu Sans",sans-serif;
+  line-height:1.6;-webkit-text-size-adjust:100%}
+.pie,h1,h2{font-family:"Gentium Book Plus","Gentium Plus","Charis SIL","Noto Serif",Georgia,serif}
+main{max-width:34rem;margin:0 auto;padding:1rem 1.1rem 4rem}
+p{max-width:30em;margin:0 0 1rem}
+a{color:inherit}
+:focus-visible{outline:4px solid var(--water);outline-offset:3px}
+
+.sizebar{display:flex;justify-content:flex-end;gap:.5rem;margin-bottom:.5rem}
+.sizebar button{font:inherit;font-size:.9rem;font-weight:700;min-width:3.2rem;min-height:2.8rem;
+  border:2px solid var(--ink);background:var(--panel);color:var(--ink);border-radius:.5rem;cursor:pointer}
+
+h1{font-size:2.3rem;line-height:1.1;margin:.4rem 0 .8rem;font-weight:700}
+.lede{font-size:1.1rem;color:var(--muted)}
+
+.quad{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1.6rem 0 2rem}
+.quad a{display:block;text-decoration:none;padding:.9rem .8rem;border-radius:.4rem;min-height:7rem}
+.quad .lab{display:block;font-size:.85rem;font-weight:700;line-height:1.3}
+.quad .pie{display:block;font-size:clamp(1.35rem,6.5vw,2rem);line-height:1.2;margin-top:.5rem;word-break:break-word}
+.q-water{color:var(--water)}.q-fire{color:var(--fire)}
+.thing.q-water{background:var(--water-tint);border:3px solid var(--water)}
+.thing.q-fire{background:var(--fire-tint);border:3px solid var(--fire)}
+.being{background:transparent;border:3px dashed currentColor}
+.legend{font-size:.9rem;color:var(--muted);margin-top:-1.2rem}
+
+section{margin-top:2.6rem}
+h2{font-size:1.75rem;line-height:1.2;margin:0 0 .3rem}
+h2 .pie{font-weight:400}
+.sub{color:var(--muted);margin-bottom:1rem}
+section.water h2{color:var(--water)} section.fire h2{color:var(--fire)}
+
+details{border-top:2px solid var(--line)}
+details:last-of-type{border-bottom:2px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:.85rem 2.4rem .85rem 0;position:relative;font-size:1.15rem;font-weight:700}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:.3rem;top:.55rem;font-size:1.6rem;font-weight:400}
+details[open] summary::after{content:"\2212"}
+summary .lang{font-weight:400;color:var(--muted);font-size:.95rem}
+details p{margin:0 0 1rem}
+.form{font-family:"Gentium Book Plus","Gentium Plus",Georgia,serif;font-style:italic}
+
+figure{margin:1.4rem 0;background:var(--panel);border:2px solid var(--line);border-radius:.5rem;padding:.8rem .6rem}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+figcaption{font-size:1rem;color:var(--muted);padding:.5rem .4rem 0}
+.svg-root{font-family:"Gentium Book Plus",Georgia,serif;fill:var(--water)}
+.svg-head{font-weight:700;fill:var(--ink)}
+.svg-word{font-family:"Gentium Book Plus",Georgia,serif;fill:var(--ink)}
+.svg-lang{fill:var(--muted)}
+.svg-line{stroke:var(--water);stroke-width:3;fill:none}
+
+.game{background:var(--panel);border:3px solid var(--ink);border-radius:.6rem;padding:1.1rem}
+.game .word{font-family:"Gentium Book Plus",Georgia,serif;font-size:2.4rem;line-height:1.1;margin:.2rem 0}
+.game .wlang{color:var(--muted);margin-bottom:1rem}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.choices button{font:inherit;font-size:1rem;font-weight:700;min-height:3.6rem;padding:.5rem;border-radius:.4rem;cursor:pointer;text-align:left;line-height:1.25}
+.c-water{color:var(--water)}.c-fire{color:var(--fire)}
+.c-thing.c-water{background:var(--water-tint);border:3px solid var(--water)}
+.c-thing.c-fire{background:var(--fire-tint);border:3px solid var(--fire)}
+.c-being{background:transparent;border:3px dashed currentColor}
+.choices button[disabled]{cursor:default;opacity:.45}
+.choices button.right{opacity:1;outline:4px solid var(--ok);outline-offset:2px}
+.verdict{min-height:1.5rem;margin-top:1rem}
+.verdict strong.y{color:var(--ok)} .verdict strong.n{color:var(--no)}
+.next{font:inherit;font-weight:700;font-size:1.05rem;margin-top:.4rem;min-height:3rem;padding:.4rem 1.2rem;
+  background:var(--ink);color:var(--bg);border:none;border-radius:.4rem;cursor:pointer}
+.score{color:var(--muted);font-size:.95rem;margin-top:.8rem}
+
+.coda{border-left:5px solid var(--fire);padding-left:1rem}
+@media (prefers-reduced-motion:no-preference){
+  details[open] > p{animation:open .2s ease-out}
+  @keyframes open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+<main>
+<div class="sizebar" role="group" aria-label="Text size">
+  <button type="button" id="smaller" aria-label="Smaller text">A−</button>
+  <button type="button" id="larger" aria-label="Larger text">A+</button>
+</div>
+
+<h1>Two waters, two fires</h1>
+<p class="lede">Proto-Indo-European seems to have kept one word for water the substance, and another for water the living force. Fire too.</p>
+
+<nav class="quad" aria-label="The four ancestors">
+  <a href="#w-thing" class="thing q-water"><span class="lab">Water, the thing</span><span class="pie">*wódr̥</span></a>
+  <a href="#w-being" class="being q-water"><span class="lab">Water, the being</span><span class="pie">*h₂ékʷeh₂</span></a>
+  <a href="#f-thing" class="thing q-fire"><span class="lab">Fire, the thing</span><span class="pie">*péh₂wr̥</span></a>
+  <a href="#f-being" class="being q-fire"><span class="lab">Fire, the being</span><span class="pie">*h₁n̥gʷnis</span></a>
+</nav>
+<p class="legend">Solid boxes are inanimate nouns. Dashed boxes are animate ones.</p>
+
+<p>Antoine Meillet spotted the pattern a century ago. The “thing” words are neuter: grammatically inert, like a stone. The “being” words are animate: they can act, be addressed, be worshipped.</p>
+<p>Hittite, the oldest attested branch, still sorts its nouns this way: common versus neuter, no masculine or feminine at all.</p>
+<p>It is an elegant hypothesis, widely repeated. It is not a theorem. But the descendants make a persuasive witness list.</p>
+
+<section class="water" id="w-thing">
+  <h2>Water, the thing <span class="pie">*wódr̥</span></h2>
+  <p class="sub">Water as stuff: something you pour, measure, get wet in.</p>
+
+  <details><summary>water, wet, wash <span class="lang">English</span></summary>
+    <p>All three from the same root. English is, on this evidence, a thoroughly inanimate-water language.</p></details>
+  <details><summary>wātar <span class="lang">Hittite</span></summary>
+    <p>Second millennium BCE, on clay. Near enough to English “water” to be faintly unnerving.</p></details>
+  <details><summary>hýdōr <span class="lang">Greek</span></summary>
+    <p>Hence hydrogen, hydraulic, the Hydra, and the clepsydra: a water clock, literally a “water thief”.</p></details>
+  <details><summary>unda <span class="lang">Latin, “wave”</span></summary>
+    <p>Hence undulate, inundate, abundant and redundant: “overflowing”, and “overflowing again”. Redundant is, fittingly, more than it needs to be.</p>
+    <p>Also surround, from Late Latin <span class="form">superundare</span>, “to overflow”. It has nothing whatever to do with round.</p></details>
+  <details><summary>undine <span class="lang">Paracelsus</span></summary>
+    <p>Coined from <span class="form">unda</span> for his water elementals. Ironic: a spirit named with the inanimate word.</p></details>
+  <details><summary>otter <span class="lang">English</span></summary>
+    <p>The “water creature”. Cousin of the Greek hydra, which is to say the otter has an unexpectedly mythological family.</p></details>
+  <details><summary>vodka, whisky <span class="lang">Russian, Irish</span></summary>
+    <p>Vodka is “little water”. Whisky is <span class="form">uisce beatha</span>, “water of life”.</p>
+    <p>Order a whisky and water and you have ordered water, twice. The barman need not be told.</p></details>
+
+  <figure>
+    <svg viewBox="0 0 320 350" role="img" aria-labelledby="rn-title rn-desc">
+      <title id="rn-title">The r and n split</title>
+      <desc id="rn-desc">The root alternated between an r form and an n form. English water, Hittite wātar and Greek hýdōr keep the r. Swedish vatten, Latin unda and Sanskrit udán keep the n.</desc>
+      <text x="160" y="34" text-anchor="middle" font-size="24" class="svg-root">*wódr̥ ~ *udén-</text>
+      <path d="M160 48 L80 98" class="svg-line"/>
+      <path d="M160 48 L240 98" class="svg-line"/>
+      <text x="80" y="124" text-anchor="middle" font-size="18" class="svg-head">keeps the r</text>
+      <text x="240" y="124" text-anchor="middle" font-size="18" class="svg-head">keeps the n</text>
+      <text x="80" y="176" text-anchor="middle" font-size="24" class="svg-word">water</text>
+      <text x="80" y="197" text-anchor="middle" font-size="16" class="svg-lang">English</text>
+      <text x="80" y="242" text-anchor="middle" font-size="24" class="svg-word">wātar</text>
+      <text x="80" y="263" text-anchor="middle" font-size="16" class="svg-lang">Hittite</text>
+      <text x="80" y="308" text-anchor="middle" font-size="24" class="svg-word">hýdōr</text>
+      <text x="80" y="329" text-anchor="middle" font-size="16" class="svg-lang">Greek</text>
+      <text x="240" y="176" text-anchor="middle" font-size="24" class="svg-word">vatten</text>
+      <text x="240" y="197" text-anchor="middle" font-size="16" class="svg-lang">Swedish</text>
+      <text x="240" y="242" text-anchor="middle" font-size="24" class="svg-word">unda</text>
+      <text x="240" y="263" text-anchor="middle" font-size="16" class="svg-lang">Latin</text>
+      <text x="240" y="308" text-anchor="middle" font-size="24" class="svg-word">udán</text>
+      <text x="240" y="329" text-anchor="middle" font-size="16" class="svg-lang">Sanskrit</text>
+    </svg>
+    <figcaption>A heteroclitic noun: r in the nominative, n elsewhere. Daughter languages each kept one half. Hittite kept both: <span class="form">wātar</span>, genitive <span class="form">wetenaš</span>.</figcaption>
+  </figure>
+</section>
+
+<section class="water" id="w-being">
+  <h2>Water, the being <span class="pie">*h₂ékʷeh₂ / *h₂ep-</span></h2>
+  <p class="sub">Water as agent: the river that moves, gives, takes.</p>
+  <p>Possibly two roots rather than one. Both sit firmly on the animate side.</p>
+
+  <details><summary>aqua <span class="lang">Latin</span></summary>
+    <p>Hence acqua, agua, eau, aquarium, aqueduct. Romance chose the living water.</p></details>
+  <details><summary>ēa <span class="lang">Old English, “river”</span></summary>
+    <p>Fossilised in island: <span class="form">īegland</span>, “water-land”. The silent s is a Renaissance blunder, borrowed from the unrelated Latin <span class="form">insula</span>.</p></details>
+  <details><summary>á <span class="lang">Old Norse, “river”</span></summary>
+    <p>Still flowing through Scandinavian river names as the single letter å. Economy of means.</p></details>
+  <details><summary>āpas <span class="lang">Vedic Sanskrit</span></summary>
+    <p>Usually plural, and feminine: “the Waters”, addressed in the Rigveda as goddesses. Very much not a stone.</p></details>
+  <details><summary>Punjab <span class="lang">Persian</span></summary>
+    <p><span class="form">Panj āb</span>, “five waters”: the five rivers. Persian <span class="form">āb</span> descends from <span class="form">*h₂ep-</span>.</p></details>
+</section>
+
+<section class="fire" id="f-thing">
+  <h2>Fire, the thing <span class="pie">*péh₂wr̥</span></h2>
+  <p class="sub">Fire as stuff: the contents of the grate.</p>
+
+  <details><summary>fire, Feuer <span class="lang">English, German</span></summary>
+    <p>Germanic took the inert fire, as it took the inert water. A practical people.</p></details>
+  <details><summary>pŷr <span class="lang">Greek</span></summary>
+    <p>Hence pyre, pyrite, pyrotechnics, and the empyrean: the highest heaven, “in the fire”.</p></details>
+  <details><summary>paḫḫur <span class="lang">Hittite</span></summary>
+    <p>Neuter, as predicted. Hittite remains an obliging witness.</p></details>
+  <details><summary>fōn <span class="lang">Gothic</span></summary>
+    <p>The same r/n split as water. English fire kept the r. Gothic kept the n: <span class="form">fōn</span>, genitive <span class="form">funins</span>.</p></details>
+</section>
+
+<section class="fire" id="f-being">
+  <h2>Fire, the being <span class="pie">*h₁n̥gʷnis</span></h2>
+  <p class="sub">Fire as agent: the thing that might decide to eat your house.</p>
+
+  <details><summary>agní <span class="lang">Vedic Sanskrit</span></summary>
+    <p>Agni, the fire god, messenger between humans and gods.</p>
+    <p>The Rigveda’s very first word is <span class="form">agním</span>: “I praise Agni.” The animate fire opens the oldest Indic text.</p></details>
+  <details><summary>ignis <span class="lang">Latin</span></summary>
+    <p>Hence ignite, igneous, ignition. Note what ignis did not become: the ordinary Romance word for fire.</p></details>
+  <details><summary>ugnis, ogon’ <span class="lang">Lithuanian, Russian</span></summary>
+    <p>Balto-Slavic kept the living fire as its everyday word. Polish too: <span class="form">ogień</span>.</p></details>
+</section>
+
+<section id="game">
+  <h2>Which ancestor?</h2>
+  <p class="sub">Tap the root each word descends from.</p>
+  <div class="game">
+    <div class="word" id="g-word" aria-live="polite"></div>
+    <div class="wlang" id="g-lang"></div>
+    <div class="choices" id="g-choices">
+      <button type="button" data-k="wt" class="c-thing c-water">Water, the thing</button>
+      <button type="button" data-k="wb" class="c-being c-water">Water, the being</button>
+      <button type="button" data-k="ft" class="c-thing c-fire">Fire, the thing</button>
+      <button type="button" data-k="fb" class="c-being c-fire">Fire, the being</button>
+    </div>
+    <div class="verdict" id="g-verdict" aria-live="polite"></div>
+    <button type="button" class="next" id="g-next" hidden>Next word</button>
+    <div class="score" id="g-score"></div>
+  </div>
+</section>
+
+<section class="coda">
+  <h2>The god retires</h2>
+  <p>Italian <span class="form">fuoco</span>, French <span class="form">feu</span>, Spanish <span class="form">fuego</span>: none descends from ignis.</p>
+  <p>They come from Latin <span class="form">focus</span>, “hearth”. Romance put the god out and kept the fireplace.</p>
+  <p>English did something similar, more thoroughly. Both its everyday words are the inert ones. The spirits survive only as loans, and one stowaway in island.</p>
+</section>
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement,scale=1.25;
+  try{var s=parseFloat(localStorage.getItem("tw-scale"));if(s>=1&&s<=2)scale=s}catch(e){}
+  function apply(){root.style.setProperty("--scale",scale);try{localStorage.setItem("tw-scale",scale)}catch(e){}}
+  apply();
+  document.getElementById("larger").onclick=function(){scale=Math.min(2,+(scale+.125).toFixed(3));apply()};
+  document.getElementById("smaller").onclick=function(){scale=Math.max(1,+(scale-.125).toFixed(3));apply()};
+
+  var names={wt:"Water, the thing",wb:"Water, the being",ft:"Fire, the thing",fb:"Fire, the being"};
+  var items=[
+    ["whisky","English, from Irish","wt","From uisce, “water”. Whisky and water is a tautology with ice."],
+    ["island","English","wb","Old English īegland, “water-land”, from the animate root. The s is a later blunder."],
+    ["igneous","English, from Latin","fb","From ignis, the living fire."],
+    ["pyre","English, from Greek","ft","From pŷr, fire the substance."],
+    ["otter","English","wt","The “water creature”, from *wódr̥."],
+    ["Punjab","Persian","wb","“Five waters”: āb comes from *h₂ep-."],
+    ["redundant","English, from Latin","wt","From unda: “overflowing again”."],
+    ["Agni","Sanskrit","fb","The fire god himself. The animate word is a deity."],
+    ["surround","English, from Latin","wt","From superundare, “to overflow”. Not from round."],
+    ["empyrean","English, from Greek","ft","“In the fire”: from pŷr."],
+    ["aquarium","English, from Latin","wb","From aqua, the living water."],
+    ["vodka","Russian","wt","“Little water”, from voda."],
+    ["ogon’","Russian","fb","Everyday Russian fire, from the animate root."],
+    ["Feuer","German","ft","Germanic kept the inert fire."]
+  ];
+  for(var i=items.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=items[i];items[i]=items[j];items[j]=t}
+  var idx=0,right=0,done=0;
+  var W=document.getElementById("g-word"),L=document.getElementById("g-lang"),
+      V=document.getElementById("g-verdict"),N=document.getElementById("g-next"),
+      S=document.getElementById("g-score"),btns=document.querySelectorAll("#g-choices button");
+  function show(){
+    var it=items[idx%items.length];
+    W.textContent=it[0];L.textContent=it[1];V.innerHTML="";N.hidden=true;
+    btns.forEach(function(b){b.disabled=false;b.classList.remove("right")});
+  }
+  btns.forEach(function(b){
+    b.addEventListener("click",function(){
+      var it=items[idx%items.length],ok=b.dataset.k===it[2];
+      done++;if(ok)right++;
+      btns.forEach(function(x){x.disabled=true;if(x.dataset.k===it[2])x.classList.add("right")});
+      V.innerHTML=(ok?'<strong class="y">Yes.</strong> ':'<strong class="n">Not quite: '+names[it[2]]+'.</strong> ')+it[3];
+      S.textContent=right+" of "+done+" so far";
+      N.hidden=false;N.focus();
+    });
+  });
+  N.addEventListener("click",function(){idx++;show();W.focus&&W.scrollIntoView({block:"nearest"})});
+  show();
+})();
+</script>
+</body>
+</html>
